@@ -9,7 +9,6 @@ const formSignIn = document.querySelector('.form-signin')
 const app={
     data(){
         return {
-            productData:[],
             user:{
                 username:'',
                 password:''
@@ -22,7 +21,7 @@ const app={
             .then(res=>{
                 this.token=res.data.token;
                 document.cookie=`token=${this.token};expires=${res.data.expired};`
-                console.log(document.cookie);
+                window.location.href="./product.html";
             })
             .catch(err=>{
                 console.log(err);
