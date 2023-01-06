@@ -7,31 +7,40 @@ const app= {
     data(){
         return{
             productsList:[],
-            tmp:{}
+            tempProduct:{}
         }
     },
     methods: {
         getData(){
             axios.get(`/v2/api/${apiPath}/products/all`)
             .then(res=>{
-                console.log(res);
                 this.productsList=res.data.products;
-                console.log(this.productsList);
                 })
             .catch(err=>{
-                console.log(err);
+                alert(err.data.message);
             })
         },
         renderDetail(item){
-            this.tmp=item;
+            this.tempProduct=item;
         }
     },
     mounted() {
-        if(document.cookie.indexOf('token')==-1){
-            alert("請先登入!");
+        const token=document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        if(token){
+            axios.defaults.headers.common['Authorization'] = token;
+            axios.post(`/v2/api/user/check`)
+            .then(()=>{
+                this.getData();
+            })
+            .catch(err=>{
+                alert(err.data.message);
+                window.location.href="./index.html";
+            })
+        }else{
+            alert('請重新登入');
             window.location.href="./index.html";
         }
-        this.getData();
+        
     }
 }
 

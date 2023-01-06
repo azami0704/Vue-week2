@@ -56,30 +56,30 @@
                 </div>
                 <div class="col-md-6">
                     <h2>單一產品細節</h2>
-                    <template v-if="Object.keys(tmp).length!==0">
+                    <template v-if="Object.keys(tempProduct).length!==0" >
                         <div class="card mb-3">
-                            <img :src="tmp.imageUrl" class="card-img-top primary-image" alt="主圖">
+                            <img :src="tempProduct.imageUrl" class="card-img-top primary-image" alt="主圖">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    {{ tmp.title }}
-                                    <span class="badge bg-primary ms-2">{{ tmp.category
+                                    {{ tempProduct.title }}
+                                    <span class="badge bg-primary ms-2">{{ tempProduct.category
                                     }}</span>
                                 </h5>
-                                <p class="card-text">商品描述：{{ tmp.description }}</p>
-                                <p class="card-text">商品內容：{{ tmp.content }}</p>
+                                <p class="card-text">商品描述：{{ tempProduct.description }}</p>
+                                <p class="card-text">商品內容：{{ tempProduct.content }}</p>
                                 <div class="d-flex">
-                                    <p class="card-text me-2">{{ tmp.price }}</p>
-                                    <p class="card-text text-secondary"><del>{{ tmp.origin_price }}</del></p>
-                                    元 / {{ tmp.unit
+                                    <p class="card-text me-2">{{ tempProduct.price }}</p>
+                                    <p class="card-text text-secondary"><del>{{ tempProduct.origin_price }}</del></p>
+                                    元 / {{ tempProduct.unit
                                     }}
                                 </div>
                             </div>
                         </div>
-                        <template v-for="img in tmp.imagesUrl">
+                        <template v-for="img in tempProduct.imagesUrl" :key="img">
                             <img :src="img" alt="" class="images m-2">
                         </template>
                     </template>
-                    <p class="text-secondary">請選擇一個商品查看</p>
+                    <p v-else class="text-secondary">請選擇一個商品查看</p>
                 </div>
             </div>
         </div>
